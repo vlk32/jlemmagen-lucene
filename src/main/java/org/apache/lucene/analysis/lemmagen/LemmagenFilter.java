@@ -21,8 +21,7 @@ import java.io.IOException;
 import org.apache.lucene.analysis.TokenFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import org.apache.lucene.analysis.util.CharacterUtils;
-import org.apache.lucene.util.Version;
+import org.apache.lucene.analysis.CharacterUtils;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -33,12 +32,11 @@ public class LemmagenFilter extends TokenFilter {
 
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(LemmagenFilter.class);
     private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
-    private final CharacterUtils charUtils;
     private Lemmatizer lm = null;
 
-    public LemmagenFilter(final TokenStream input, final String lexiconResource, final Version version) {
+
+    public LemmagenFilter(final TokenStream input, final String lexiconResource) {
         super(input);
-        this.charUtils = CharacterUtils.getInstance(version);
         try {
             this.lm = LemmatizerFactory.getPrebuilt(lexiconResource);
         } catch (IOException e) {
@@ -46,18 +44,20 @@ public class LemmagenFilter extends TokenFilter {
         }
     }
 
+
     @Override
     public final boolean incrementToken() throws IOException {
         if (!input.incrementToken()) {
             return false;
         }
-        charUtils.toLowerCase(termAtt.buffer(), 0, termAtt.length());
+        CharacterUtils.toLowerCase(termAtt.buffer(), 0, termAtt.length());
         CharSequence lemma = lm.lemmatize(termAtt);
         if (!equalCharSequences(lemma, termAtt)) {
             termAtt.setEmpty().append(lemma);
         }
         return true;
     }
+
 
     /**
      * Compare two char sequences for equality. Assumes non-null arguments.

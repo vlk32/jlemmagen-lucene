@@ -37,6 +37,7 @@ public class LemmagenFilterFactory extends TokenFilterFactory {
      */
     public static final String LEXICON_SCHEMA_ATTRIBUTE = "lexicon";
 
+
     /**
      * Sole constructor. See {@link AbstractAnalysisFactory} for initialization lifecycle.
      *
@@ -47,6 +48,7 @@ public class LemmagenFilterFactory extends TokenFilterFactory {
         lexiconResource = args.get(LEXICON_SCHEMA_ATTRIBUTE);
     }
 
+
     /**
      * {@inheritDoc}
      *
@@ -55,6 +57,6 @@ public class LemmagenFilterFactory extends TokenFilterFactory {
      */
     @Override
     public TokenStream create(TokenStream ts) {
-        return new LemmagenFilter(ts, lexiconResource, luceneMatchVersion);
+        return new LemmagenFilter(ts, lexiconResource);
     }
 }

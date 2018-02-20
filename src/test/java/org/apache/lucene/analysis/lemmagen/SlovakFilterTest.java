@@ -18,7 +18,6 @@ package org.apache.lucene.analysis.lemmagen;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.HashSet;
 import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
@@ -29,8 +28,6 @@ import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter;
 import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
-import static org.apache.lucene.util.LuceneTestCase.TEST_VERSION_CURRENT;
-import org.apache.lucene.util.Version;
 import org.junit.Test;
 
 /**
@@ -44,20 +41,21 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
         assertTrue(analyze(getAnalyzer(), "/adam-sangala.txt") < 8000);
     }
 
+
     private Analyzer getAnalyzer() {
         return new Analyzer() {
 
             @Override
-            protected Analyzer.TokenStreamComponents createComponents(String fieldName, Reader reader) {
-                StandardTokenizer source = new StandardTokenizer(Version.LUCENE_45, reader);
+            protected Analyzer.TokenStreamComponents createComponents(String fieldName) {
+                StandardTokenizer source = new StandardTokenizer();
 
                 TokenStream filter = new ASCIIFoldingFilter(new LemmagenFilter(
-                        new LowerCaseFilter(TEST_VERSION_CURRENT,
-                                new StandardFilter(TEST_VERSION_CURRENT, source)), "mlteast-sk", TEST_VERSION_CURRENT));
+                    new LowerCaseFilter(new StandardFilter(source)), "mlteast-sk"));
                 return new Analyzer.TokenStreamComponents(source, filter);
             }
         };
     }
+
 
     private int analyze(Analyzer analyzer, String resource) {
         TokenStream stream = null;
