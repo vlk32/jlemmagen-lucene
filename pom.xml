@@ -15,6 +15,23 @@
         <lucene.version>7.2.1</lucene.version>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>xit-public-releases</id>
+            <url>https://repository.xit.camp/repository/maven-public-releases/</url>
+        </repository>
+        <repository>
+            <id>xit-public-snapshots</id>
+            <url>https://repository.xit.camp/repository/maven-public-snapshots/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+        </repository>
+    </repositories>
+
     <distributionManagement>
         <repository>
             <id>xit-public-releases</id>
