@@ -29,12 +29,17 @@ import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Michal Hlavac <hlavki@hlavki.eu>
  */
 public class SlovakFilterTest extends BaseTokenStreamTestCase {
+
+    private static final Logger LOG = LoggerFactory.getLogger(SlovakFilterTest.class);
+
 
     @Test
     public void doFilter() throws IOException {
@@ -60,7 +65,7 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
     private int analyze(Analyzer analyzer, String resource) {
         TokenStream stream = null;
         InputStream in = null;
-        Set<Integer> words = new HashSet<Integer>();
+        Set<Integer> words = new HashSet<>();
         try {
             long start = System.currentTimeMillis();
             in = SlovakFilterTest.class.getResourceAsStream(resource);
@@ -74,10 +79,10 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
             }
             stream.end();
             long end = System.currentTimeMillis();
-            System.out.println("All words count: " + count);
-            System.out.println("Words set count: " + words.size());
-            System.out.println("Commpression: " + ((double) words.size() / count));
-            System.out.println("TIME: " + (end - start) + " ms");
+            LOG.info("All words count: {}", count);
+            LOG.info("Words set count: {}", words.size());
+            LOG.info("Commpression: {}", ((double) words.size() / count));
+            LOG.info("TIME: {} ms", (end - start));
             return words.size();
         } catch (IOException e) {
             // not thrown b/c we're using a string reader...
@@ -86,12 +91,12 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
             if (in != null) try {
                 in.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("Can't close stream", e);
             }
             if (stream != null) try {
                 stream.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("Can't close stream", e);
             }
         }
 
