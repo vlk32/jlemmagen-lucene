@@ -55,7 +55,7 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
                 StandardTokenizer source = new StandardTokenizer();
 
                 TokenStream filter = new ASCIIFoldingFilter(new LemmagenFilter(
-                    new LowerCaseFilter(new StandardFilter(source)), "mlteast-sk"));
+                    new LowerCaseFilter(new StandardFilter(source)), "lemmagen/lang/sk"));
                 return new Analyzer.TokenStreamComponents(source, filter);
             }
         };

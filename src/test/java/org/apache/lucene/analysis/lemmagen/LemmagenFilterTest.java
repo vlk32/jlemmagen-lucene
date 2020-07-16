@@ -46,7 +46,7 @@ public class LemmagenFilterTest extends BaseTokenStreamTestCase {
             @Override
             protected Analyzer.TokenStreamComponents createComponents(String fieldName) {
                 StandardTokenizer source = new StandardTokenizer();
-                LemmagenFilter filter = new LemmagenFilter(source, "mlteast-en");
+                LemmagenFilter filter = new LemmagenFilter(source, "lemmagen/lang/en");
                 return new TokenStreamComponents(source, filter);
             }
         };
