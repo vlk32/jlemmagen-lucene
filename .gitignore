@@ -25,3 +25,11 @@ buildNumber.properties
 ### NetBeans ###
 nbproject/private/
 nbactions.xml
+
+### Gradle ###
+.gradle
+build
+
+### VIM ###
+*.swp
+*.swo
