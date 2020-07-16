@@ -15,22 +15,22 @@
  */
 package org.apache.lucene.analysis.lemmagen;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashSet;
-import java.util.Set;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.BaseTokenStreamTestCase;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.core.LowerCaseFilter;
 import org.apache.lucene.analysis.miscellaneous.ASCIIFoldingFilter;
-import org.apache.lucene.analysis.standard.StandardFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -55,7 +55,7 @@ public class SlovakFilterTest extends BaseTokenStreamTestCase {
                 StandardTokenizer source = new StandardTokenizer();
 
                 TokenStream filter = new ASCIIFoldingFilter(new LemmagenFilter(
-                    new LowerCaseFilter(new StandardFilter(source)), "lemmagen/lang/sk"));
+                    new LowerCaseFilter(source), "lemmagen/lang/sk"));
                 return new Analyzer.TokenStreamComponents(source, filter);
             }
         };

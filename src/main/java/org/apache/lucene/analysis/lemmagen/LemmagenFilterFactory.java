@@ -53,7 +53,7 @@ public class LemmagenFilterFactory extends TokenFilterFactory {
      * {@inheritDoc}
      *
      * @param ts
-     * @return
+     * @return tokenStream
      */
     @Override
     public TokenStream create(TokenStream ts) {
