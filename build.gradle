@@ -13,7 +13,7 @@ repositories {
 dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.25'
     implementation "org.apache.lucene:lucene-analyzers-common:${lucene_version}"
-    implementation 'io.github.vlk32:jlemmagen:1.0.1'
+    implementation 'eu.hlavki.text:jlemmagen:1.0.1'
     testImplementation "org.apache.lucene:lucene-test-framework:${lucene_version}"
     testImplementation 'org.slf4j:slf4j-simple:1.7.25'
 }
@@ -22,7 +22,7 @@ versioning {
     branchEnv = [ 'CI_COMMIT_BRANCH', 'BRANCH_NAME' ]
 }
 
-group = 'io.github.vlk32'
+group = 'eu.hlavki.text'
 version = versioning.info.tag && !versioning.info.dirty ? versioning.info.tag : versioning.info.display
 sourceCompatibility = '1.8'
 
@@ -63,7 +63,7 @@ publishing {
             pom {
                 name.set("jlemmagen-lucene")
                 description.set("Integration of jlemmagen with lucene")
-                url.set("https://github.com/vlk32/jlemmagen-lucene")
+                url.set("https://github.com/hlavki/jlemmagen-lucene")
                 licenses {
                     license {
                         name.set("Apache License 2.0")
@@ -76,16 +76,11 @@ publishing {
                         name.set("Michal Hlavac")
                         email.set("miso@hlavki.eu")
                     }
-                    developer {
-                        id.set("vlk32")
-                        name.set("Vladimir Kralik")
-                        email.set("vkralik@gmail.com")
-                    }
                 }
                 scm {
-                    connection.set("scm:git:https://github.com/vlk32/jlemmagen-lucene")
-                    developerConnection.set("scm:git:https://github.com/vlk32/jlemmagen-lucene")
-                    url.set("https://github.com/vlk32/jlemmagen-lucene")
+                    connection.set("scm:git:https://github.com/hlavki/jlemmagen-lucene")
+                    developerConnection.set("scm:git:https://github.com/hlavki/jlemmagen-lucene")
+                    url.set("https://github.com/hlavki/jlemmagen-lucene")
                 }
 
             }
